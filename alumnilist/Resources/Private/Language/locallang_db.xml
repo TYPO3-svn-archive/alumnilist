@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'alumnilist'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_alumnilist_domain_model_alumnus">Alumnus</label>
+			<label index="tx_alumnilist_domain_model_alumnus.unmarried_name">Unmarried Name</label>
+			<label index="tx_alumnilist_domain_model_year">Year</label>
+			<label index="tx_alumnilist_domain_model_year.year">Year</label>
+			<label index="tx_alumnilist_domain_model_year.courses">Courses</label>
+			<label index="tx_alumnilist_domain_model_course">Course</label>
+			<label index="tx_alumnilist_domain_model_course.name">Name</label>
+			<label index="tx_alumnilist_domain_model_course.members">Members</label>
+			<label index="tx_alumnilist_domain_model_alumnuschecksum">Alumnus Checksum</label>
+			<label index="tx_alumnilist_domain_model_alumnuschecksum.checksum">Checksum</label>
+			<label index="tx_alumnilist_domain_model_alumnuschecksum.year">Year</label>
+		</languageKey>
+	</data>
+</T3locallang>

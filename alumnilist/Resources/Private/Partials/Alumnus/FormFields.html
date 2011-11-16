@@ -1,0 +1,29 @@
+<div class="alumni-form-row">
+	<label>Name</label>
+	<f:form.textfield property="firstName" placeholder="Max" />
+	<f:form.textfield property="lastName" placeholder="Mustermann" />
+</div>
+<div class="alumni-form-row">
+	<label for="unmarriedName">Geburtsname (leerlassen falls nicht zutreffend)</label>
+	<f:form.textfield property="unmarriedName" placeholder="" />
+</div>
+<div class="alumni-form-row">
+	<label for="year">Abiturjahrgang</label>
+	<f:form.select property="year" options="{years}" optionLabelField="year" optionValueField="uid" sortByOptionLabel="true" />
+</div>
+<div class="alumni-form-row">
+	<label for="telephone">Geburtsdatum</label>
+	<f:form.textfield property="birthday" placeholder="DD.MM.YYYY" />
+</div>
+<div class="alumni-form-row">
+	<label for="telephone">Telefonnummer</label>
+	<f:form.textfield property="telephone" placeholder="+49-0000-0000" />
+</div>
+<div class="alumni-form-row">
+	<label for="">Wohnort</label>
+	<f:form.textfield property="city" placeholder="Musterstadt" />
+</div>
+<div class="alumni-form-row">
+	<label for="country">Land</label>
+	<f:form.textfield property="country" placeholder="Deutschland" />
+</div>

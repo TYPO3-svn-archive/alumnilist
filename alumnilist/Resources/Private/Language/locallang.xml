@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Alumni List extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_alumnilist_domain_model_alumnus">Alumnus</label>
+			<label index="tx_alumnilist_domain_model_alumnus.unmarried_name">unmarriedName</label>
+			<label index="tx_alumnilist_domain_model_year">Year</label>
+			<label index="tx_alumnilist_domain_model_year.year">year</label>
+			<label index="tx_alumnilist_domain_model_year.courses">courses</label>
+			<label index="tx_alumnilist_domain_model_course">Course</label>
+			<label index="tx_alumnilist_domain_model_course.name">name</label>
+			<label index="tx_alumnilist_domain_model_course.members">members</label>
+			<label index="tx_alumnilist_domain_model_alumnuschecksum">AlumnusChecksum</label>
+			<label index="tx_alumnilist_domain_model_alumnuschecksum.checksum">checksum</label>
+			<label index="tx_alumnilist_domain_model_alumnuschecksum.year">year</label>
+		</languageKey>
+	</data>
+</T3locallang>

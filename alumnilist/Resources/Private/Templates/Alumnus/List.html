@@ -1,0 +1,24 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+	<table>
+		<thead>
+			<tr>
+				<th>Nachname</th>
+				<th>Vorname</th>
+				<th>Abiturjahrgang</th>
+				<th>E-Mail-Adresse</th>
+			</tr>
+		</thead>
+		<tbody>
+			<f:for each="{alumni}" as="alumnus">
+				<tr>
+					<td>{alumnus.lastName}</td>
+					<td>{alumnus.firstName}</td>
+					<td>{alumnus.year.year}</td>
+					<td>{alumnus.emailAddress}</td>
+				</tr>
+			</f:for>
+		</tbody>
+	</table>
+</f:section>

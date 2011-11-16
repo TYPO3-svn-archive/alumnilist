@@ -1,0 +1,30 @@
+plugin.tx_alumnilist {
+	view {
+		# cat=plugin.tx_alumnilist/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:alumnilist/Resources/Private/Templates/
+		# cat=plugin.tx_alumnilist/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:alumnilist/Resources/Private/Partials/
+		# cat=plugin.tx_alumnilist/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:alumnilist/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_alumnilist//a; type=int+; label=Default storage PID
+		storagePid = 
+	}
+}
+
+
+module.tx_alumnilist {
+	view {
+		# cat=module.tx_alumnilist/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:alumnilist/Resources/Private/Backend/Templates/
+		# cat=module.tx_alumnilist/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:alumnilist/Resources/Private/Backend/Partials/
+		# cat=module.tx_alumnilist/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:alumnilist/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_alumnilist//a; type=int+; label=Default storage PID
+		storagePid = 
+	}
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+	<sheets>
+		<behaviour>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:mm_forum/Resources/Private/Language/locallang_flexforms.xml:Behaviour</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<switchableControllerActions>
+						<TCEforms>
+							<label>LLL:EXT:mm_forum/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action</label>
+							<config>
+								<type>select</type>
+								<maxitems>1</maxitems>
+								<size>6</size>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0">Vollständige Ehemaligenliste</numIndex>
+										<numIndex index="1">Alumnus->list;Alumnus->show</numIndex>
+									</numIndex>
+									<numIndex index="1">
+										<numIndex index="0">Kursliste für Jahrgang</numIndex>
+										<numIndex index="1">Course->list</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">Anmeldeformular</numIndex>
+										<numIndex index="1">Alumnus->new;Alumnus->create</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</switchableControllerActions>
+					<settings.parameters.year>
+						<TCEforms>
+							<label>LLL:EXT:mm_forum/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_alumnilist_domain_model_year</foreign_table>
+								<maxitems>1</maxitems>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</settings.parameters.year>
+				</el>
+			</ROOT>
+		</behaviour>
+	</sheets>
+</T3DataStructure>
