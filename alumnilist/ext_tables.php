@@ -28,9 +28,9 @@ if (TYPO3_MODE === 'BE') {
 		'',						// Position
 		array(
 			'Alumnus' => 'list, new, create, edit, update, delete, show',
-+			'Year' => 'list, show',
-+			'Course' => 'list, show',
-+			'AlumnusChecksum' => 'list, show, new, create, edit, update, delete',
+#			'Year' => 'list, show',
+#			'Course' => 'list, show',
+#			'AlumnusChecksum' => 'list, show, new, create, edit, update, delete',
 		),
 		array(
 			'access' => 'user,group',

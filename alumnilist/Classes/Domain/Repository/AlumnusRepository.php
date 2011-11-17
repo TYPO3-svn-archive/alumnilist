@@ -32,6 +32,31 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Alumnilist_Domain_Repository_AlumnusRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
+class Tx_Alumnilist_Domain_Repository_AlumnusRepository
+	extends Tx_Extbase_Domain_Repository_FrontendUserRepository
+	implements Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface {
 
+	public function findAllFiltered(Tx_Alumnilist_Domain_Model_Year $year=NULL, $search=NULL) {
+		$query = $this->createQuery();
+		$constraints = array();
+		
+		if($year !== NULL) {
+			$constraints[] = $query->equals('year', $year);
+		}
+		
+		if($search !== NULL) {
+			$constraints[] = $query->logicalOr(
+				$query->like('lastName', $search),
+				$query->like('firstName', $search),
+				$query->like('email', $searc)
+			);
+		}
+		
+		if(count($constraints)) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+		
+		return $query->execute();
+	}
+	
 }

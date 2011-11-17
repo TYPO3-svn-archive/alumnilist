@@ -7,7 +7,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Pi1',
 	array(
-		'Alumnus' => 'list, new, create, edit, update, delete, show',
+		'Alumnus' => 'list, filteredList, new, create, edit, update, delete, show',
 		'Year' => 'list, show',
 		'Course' => 'list, show',
 		'AlumnusChecksum' => 'list, show, new, create, edit, update, delete',
@@ -15,7 +15,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	),
 	// non-cacheable actions
 	array(
-		'Alumnus' => 'create, update, delete, ',
+		'Alumnus' => 'filteredList, create, update, delete, ',
 		'Year' => '',
 		'Course' => '',
 		'AlumnusChecksum' => 'create, update, delete',

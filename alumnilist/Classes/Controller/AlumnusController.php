@@ -36,8 +36,7 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 
 	/**
 	 * alumnusRepository
-	 *
-	 * @var Tx_Alumnilist_Domain_Repository_AlumnusRepository
+	 * @var Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface
 	 */
 	protected $alumnusRepository;
 
@@ -57,7 +56,7 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 * @param Tx_Alumnilist_Domain_Repository_AlumnusRepository $alumnusRepository
 	 * @return void
 	 */
-	public function injectAlumnusRepository(Tx_Alumnilist_Domain_Repository_AlumnusRepository $alumnusRepository) {
+	public function injectAlumnusRepository(Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface $alumnusRepository) {
 		$this->alumnusRepository = $alumnusRepository;
 	}
 
@@ -68,15 +67,20 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	public function injectAlumnusChecksumRepository(Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository $alumnusChecksumRepository) {
 		$this->alumnusChecksumRepository = $alumnusChecksumRepository;
 	}
-
+	
 	/**
-	 * action list
-	 *
+	 * @param Tx_Alumnilist_Domain_Model_Year $year
+	 * @param string $search
 	 * @return void
 	 */
-	public function listAction(Tx_Alumnilist_Domain_Model_Year $year = NULL) {
-		$alumni = $this->alumnusRepository->findAll();
-		$this->view->assign('alumni', $alumni);
+	public function listAction(Tx_Alumnilist_Domain_Model_Year $year = NULL, $search=NULL) {
+		echo "ASDSAD";
+		$alumni = $this->alumnusRepository->findAllFiltered($year, $search);
+		$this->view
+			->assign('alumni', $alumni)
+			->assign('years', array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()))
+			->assign('year', $year)
+			->assign('search', $search);
 	}
 
 	/**
