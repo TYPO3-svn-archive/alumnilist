@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_alumnilist_domain_model_course'] = array(
 	'ctrl' => $TCA['tx_alumnilist_domain_model_course']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, members, page',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, members, year, page',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, members, page, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, year, name, members, page, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -118,7 +118,7 @@ $TCA['tx_alumnilist_domain_model_course'] = array(
 		),
 		'year' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_course.year',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.year',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_alumnilist_domain_model_year',
@@ -129,7 +129,7 @@ $TCA['tx_alumnilist_domain_model_course'] = array(
 		),
 		'page' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_course.page',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.page',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',

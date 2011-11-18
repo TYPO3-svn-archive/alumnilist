@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Alumni List extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="Behaviour">Behaviour</label>
+			<label index="Behaviour_Action">Display the following view:</label>
+			<label index="Behaviour_Action_FullList">Full list of all alumni</label>
+			<label index="Behaviour_Action_UserProfile">User profile</label>
+			<label index="Behaviour_Action_Courses">All courses of a specific year</label>
+			<label index="Behaviour_Action_CourseMembers">All members of a course</label>
+			<label index="Behaviour_Action_Registration">Registration form</label>
+			<label index="Behaviour_Year">Year</label>
+			<label index="Behaviour_Course">Course</label>
+		</languageKey>
+	</data>
+</T3locallang>

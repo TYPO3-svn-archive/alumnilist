@@ -1,0 +1,29 @@
+
+<table>
+	<thead>
+		<tr>
+			<th>Nachname</th>
+			<th>Vorname</th>
+			<f:if condition="{disable.year}">
+				<f:else>
+					<th>Abiturjahrgang</th>
+				</f:else>
+			</f:if>
+			<th>E-Mail-Adresse</th>
+		</tr>
+	</thead>
+	<tbody>
+		<f:for each="{alumni}" as="alumnus">
+			<tr>
+				<td><f:link.action action="show" arguments="{alumnus: alumnus}">{alumnus.lastName}</f:link.action></td>
+				<td>{alumnus.firstName}</td>
+				<f:if condition="{disable.year}">
+					<f:else>
+						<td>{alumnus.year.year}</td>
+					</f:else>
+				</f:if>
+				<td>{alumnus.email}</td>
+			</tr>
+		</f:for>
+	</tbody>
+</table>

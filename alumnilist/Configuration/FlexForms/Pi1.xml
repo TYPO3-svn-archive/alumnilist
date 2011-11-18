@@ -4,28 +4,36 @@
 		<behaviour>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:mm_forum/Resources/Private/Language/locallang_flexforms.xml:Behaviour</sheetTitle>
+					<sheetTitle>LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<switchableControllerActions>
 						<TCEforms>
-							<label>LLL:EXT:mm_forum/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action</label>
+							<label>LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action</label>
 							<config>
 								<type>select</type>
 								<maxitems>1</maxitems>
 								<size>6</size>
 								<items>
 									<numIndex index="0">
-										<numIndex index="0">Vollständige Ehemaligenliste</numIndex>
-										<numIndex index="1">Alumnus->list;Alumnus->show</numIndex>
+										<numIndex index="0">LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action_FullList</numIndex>
+										<numIndex index="1">Alumnus->list</numIndex>
 									</numIndex>
 									<numIndex index="1">
-										<numIndex index="0">Kursliste für Jahrgang</numIndex>
-										<numIndex index="1">Course->list</numIndex>
+										<numIndex index="0">LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action_UserProfile</numIndex>
+										<numIndex index="1">Alumnus->show</numIndex>
 									</numIndex>
 									<numIndex index="2">
-										<numIndex index="0">Anmeldeformular</numIndex>
+										<numIndex index="0">LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action_Courses</numIndex>
+										<numIndex index="1">Course->list</numIndex>
+									</numIndex>
+									<numIndex index="3">
+										<numIndex index="0">LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action_CourseMembers</numIndex>
+										<numIndex index="1">Course->show</numIndex>
+									</numIndex>
+									<numIndex index="4">
+										<numIndex index="0">LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action_Registration</numIndex>
 										<numIndex index="1">Alumnus->new;Alumnus->create</numIndex>
 									</numIndex>
 								</items>
@@ -34,15 +42,38 @@
 					</switchableControllerActions>
 					<settings.parameters.year>
 						<TCEforms>
-							<label>LLL:EXT:mm_forum/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action</label>
+							<label>LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Year</label>
 							<config>
 								<type>select</type>
 								<foreign_table>tx_alumnilist_domain_model_year</foreign_table>
 								<maxitems>1</maxitems>
 								<size>1</size>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
 							</config>
 						</TCEforms>
 					</settings.parameters.year>
+					<settings.parameters.course>
+						<TCEforms>
+							<label>LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Course</label>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_alumnilist_domain_model_course</foreign_table>
+								<maxitems>1</maxitems>
+								<size>1</size>
+								<items>
+									<numIndex index="0">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.parameters.course>
 				</el>
 			</ROOT>
 		</behaviour>

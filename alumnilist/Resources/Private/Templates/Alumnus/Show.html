@@ -1,21 +1,32 @@
 <f:layout name="Default" />
 
-This Template is responsible for displaying a single view for a domain object
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Single View for Alumnus</h1>
 
-<f:flashMessages />
-<f:render partial="Alumnus/Properties" arguments="{alumnus:alumnus}" />
-<f:link.action action="list">Back to list</f:link.action><br />
-<f:link.action action="new">New Alumnus</f:link.action>
+	<f:flashMessages />
+
+	<div>
+		<div>Name</div>
+		<div>{alumnus.name}</div>
+	</div>
+	<div>
+		<div>Jahrgang</div>
+		<div>{alumnus.year.year}</div>
+	</div>
+	<div>
+		<div>E-Mail</div>
+		<div><f:link.email email="{alumnus.email}">{alumnus.email}</f:link.email></div>
+	</div>
+	<f:if condition="{alumnus.telephone}">
+		<div>
+			<div>Telefonnummer</div>
+			<div>{alumnus.telephone}</div>
+		</div>
+	</f:if>
+	<f:if condition="{alumnus.cityAndCountry}">
+		<div>
+			<div>Wohnort</div>
+			<div>{alumnus.cityAndCountry}</div>
+		</div>
+	</f:if>
+
 </f:section>

@@ -1,0 +1,14 @@
+<f:form action="list" method="post">
+	<fieldset>
+		<legend>Filter</legend>
+		<div>
+			<label for="year">Abiturjahrgang</label>
+			<f:form.select name="year" options="{years}" optionLabelField="year" value="{year}" />
+		</div>
+		<div>
+			<label for="search">Suche</label>
+			<f:form.textfield name="search" value="{search}" />
+		</div>
+		<f:form.submit value="Filtern" />
+	</fieldset>
+</f:form>

@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2011 Martin Helmich <typo3@martin-helmich.de>
@@ -22,7 +22,8 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
+
 
 
 /**
@@ -32,31 +33,44 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Alumnilist_Domain_Repository_AlumnusRepository
-	extends Tx_Extbase_Domain_Repository_FrontendUserRepository
-	implements Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface {
+class Tx_Alumnilist_Domain_Repository_AlumnusRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository
+		implements Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface {
+
+
+
+	public function findAll() {
+		return parent::findAll();
+	}
+
+
 
 	public function findAllFiltered(Tx_Alumnilist_Domain_Model_Year $year=NULL, $search=NULL) {
 		$query = $this->createQuery();
 		$constraints = array();
-		
-		if($year !== NULL) {
+
+		if ($year !== NULL) {
 			$constraints[] = $query->equals('year', $year);
 		}
-		
-		if($search !== NULL) {
+
+		if ($search !== NULL) {
 			$constraints[] = $query->logicalOr(
-				$query->like('lastName', $search),
-				$query->like('firstName', $search),
-				$query->like('email', $searc)
+					$query->like('lastName', $search), $query->like('firstName', $search),
+					$query->like('email', $searc)
 			);
 		}
-		
-		if(count($constraints)) {
+
+		if (count($constraints)) {
 			$query->matching($query->logicalAnd($constraints));
 		}
-		
+
+		$query->setOrderings(array(
+			'lastName' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING,
+			'firstName' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+		));
+
 		return $query->execute();
 	}
-	
+
+
+
 }

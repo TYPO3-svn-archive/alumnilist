@@ -114,8 +114,16 @@ class Tx_Alumnilist_Domain_Model_Alumnus extends Tx_Extbase_Domain_Model_Fronten
 		$this->birthday = $birthday;
 	}
 
+	public function getName() {
+		$name = $this->getFirstName().' '.$this->getLastName();
+		if($this->unmarriedName) $name .= ' (geb. '.$this->unmarriedName.')';
+		return $name;
+	}
 
-
-
+	public function getCityAndCountry() {
+		if($this->city && $this->country)
+			return $this->city.', '.$this->country;
+		else return $this->city.$this->country;
+	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2011 Martin Helmich <typo3@martin-helmich.de>
@@ -22,7 +22,8 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
+
 
 
 /**
@@ -34,10 +35,26 @@
  */
 class Tx_Alumnilist_Controller_CourseController extends Tx_Extbase_MVC_Controller_ActionController {
 
+
+
+	/**
+	 * Initializes the list action. Sets default parameters from settings. May
+	 * be overridden using GET/POST parameters.
+	 * @return void
+	 */
 	public function initializeListAction() {
-		if(!$this->request->hasArgument('year'))
-			$this->request->setArgument('year', $this->settings['parameters']['year']);
+		if (!$this->request->hasArgument('year'))
+			$this->request->setArgument('year', (int) $this->settings['parameters']['year']);
 	}
+
+
+
+	public function initializeShowAction() {
+		if (!$this->request->hasArgument('course') && $this->settings['parameters']['course'])
+			$this->request->setArgument('course', (int) $this->settings['parameters']['year']);
+	}
+
+
 
 	/**
 	 * Lists all courses of a specific year.
@@ -49,14 +66,18 @@ class Tx_Alumnilist_Controller_CourseController extends Tx_Extbase_MVC_Controlle
 		$this->view->assign('year', $year);
 	}
 
+
+
 	/**
-	 * action show
-	 *
-	 * @param $course
+	 * Displays details for a specific course.
+	 * @param Tx_Alumnilist_Domain_Model_Course $course
+	 *                                 The course for which to display details.
 	 * @return void
 	 */
 	public function showAction(Tx_Alumnilist_Domain_Model_Course $course) {
 		$this->view->assign('course', $course);
 	}
+
+
 
 }

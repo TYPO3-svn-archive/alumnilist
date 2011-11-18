@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2011 Martin Helmich <typo3@martin-helmich.de>
@@ -22,7 +22,8 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
+
 
 
 /**
@@ -32,12 +33,17 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Alumnilist_Domain_Repository_YearRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Alumnilist_Domain_Repository_YearRepository extends Tx_Extbase_Persistence_Repository
+		implements Tx_Alumnilist_Domain_Repository_YearRepositoryInterface {
+
+
 
 	public function findAll() {
 		$query = $this->createQuery();
 		$query->setOrderings(array('year' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
 		return $query->execute();
 	}
+
+
 
 }

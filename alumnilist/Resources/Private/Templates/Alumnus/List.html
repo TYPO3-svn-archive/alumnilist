@@ -1,6 +1,15 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<f:render partial="Alumnus/Filter" arguments="{year: year, search: search, years: years}" />
-	<f:render partial="Alumnus/List" arguments="{alumni: alumni}" />
+	<f:if condition="{settings.parameters.year}">
+		<f:else>
+			<f:render partial="Alumnus/Filter" arguments="{year: year, search: search, years: years}" />
+		</f:else>
+	</f:if>
+	<div>
+		<f:count>{alumni}</f:count> Ehemalige gefunden.
+	</div>
+	<f:widget.paginate objects="{alumni}" as="paginatedAlumni" configuration="{itemsPerPage: 30}">
+		<f:render partial="Alumnus/List" arguments="{alumni: paginatedAlumni}" />
+	</f:widget.paginate>
 </f:section>

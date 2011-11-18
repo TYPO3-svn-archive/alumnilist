@@ -2,10 +2,10 @@
 # Table structure for table 'tx_alumnilist_domain_model_alumnus'
 #
 CREATE TABLE fe_users (
-	unmarried_name varchar(255) DEFAULT '' NOT NULL,
-	year int(11) unsigned DEFAULT '0' NOT NULL,
-	courses int(11) unsigned DEFAULT '0' NOT NULL,
-	birthday int(11) unsigned DEFAULT '0' NOT NULL
+	tx_alumnilist_unmarried_name varchar(255) DEFAULT '' NOT NULL,
+	tx_alumnilist_year int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_alumnilist_courses int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_alumnilist_birthday int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 #

@@ -27,10 +27,7 @@ if (TYPO3_MODE === 'BE') {
 		'mod1',	// Submodule key
 		'',						// Position
 		array(
-			'Alumnus' => 'list, new, create, edit, update, delete, show',
-#			'Year' => 'list, show',
-#			'Course' => 'list, show',
-#			'AlumnusChecksum' => 'list, show, new, create, edit, update, delete',
+			'Backend' => 'index',
 		),
 		array(
 			'access' => 'user,group',
@@ -142,7 +139,7 @@ $tempColumns = array(
 		),
 		'tx_alumnilist_year' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_alumnus.year',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.year',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_alumnilist_domain_model_year',
@@ -153,7 +150,7 @@ $tempColumns = array(
 		),
 		'tx_alumnilist_courses' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_alumnus.courses',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.courses',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_alumnilist_domain_model_course',
@@ -176,7 +173,7 @@ $tempColumns = array(
 t3lib_div::loadTCA('fe_users');
 t3lib_extMgm::addTCAcolumns    ( 'fe_users', $tempColumns, 1);
 $TCA['fe_users']['types']['Tx_Alumnilist_Domain_Model_Alumnus'] = $TCA['fe_users']['types']['0'];
-t3lib_extMgm::addToAllTCAtypes ( 'fe_users', '--div--;LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:fe_users.alumnilist.tab.settings, tx_alumnilist_unmarried_name, tx_alumnilist_year, tx_alumnilist_courses, tx_alumnilist_birthday');
+t3lib_extMgm::addToAllTCAtypes ( 'fe_users', '--div--;LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_alumnus.tabname, tx_alumnilist_unmarried_name, tx_alumnilist_year, tx_alumnilist_courses, tx_alumnilist_birthday');
 
 $TCA['fe_users']['columns']['tx_extbase_type']['config']['items'][] = array(
 	'Tx_Alumnilist_Domain_Model_Alumnus', 'Tx_Alumnilist_Domain_Model_Alumnus'

@@ -95,7 +95,7 @@ $TCA['tx_alumnilist_domain_model_year'] = array(
 		),
 		'year' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_year.year',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.year',
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
@@ -104,7 +104,7 @@ $TCA['tx_alumnilist_domain_model_year'] = array(
 		),
 		'courses' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_year.courses',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.courses',
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_alumnilist_domain_model_course',
@@ -121,7 +121,7 @@ $TCA['tx_alumnilist_domain_model_year'] = array(
 		),
 		'page' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_year.courses',
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.page',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',

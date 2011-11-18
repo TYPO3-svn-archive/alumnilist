@@ -7,8 +7,8 @@
 	</meta>
 	<data type="array">
 	<languageKey index="default" type="array">
-			<label index="year.description">year</label>
-			<label index="courses.description">courses</label>
+			<label index="courses.description">All courses within this year.</label>
+			<label index="page.description">A specific TYPO3 page with further details on this year.</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2011 Martin Helmich <typo3@martin-helmich.de>
@@ -22,7 +22,8 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
+
 
 
 /**
@@ -34,77 +35,144 @@
  */
 class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controller_ActionController {
 
+
+
+	/*
+	 * ATTRIBUTES
+	 */
+
+
+
 	/**
-	 * alumnusRepository
+	 * An alumnus repository.
 	 * @var Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface
 	 */
-	protected $alumnusRepository;
+	protected $alumnusRepository = NULL;
+
 
 	/**
-	 * @var Tx_Alumnilist_Domain_Repository_YearRepository
+	 * A year repository.
+	 * @var Tx_Alumnilist_Domain_Repository_YearRepositoryInterface
 	 */
-	protected $yearRepository;
+	protected $yearRepository = NULL;
+
 
 	/**
-	 * @var Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository
+	 * An alumnus checksum repository.
+	 * @var Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface
 	 */
-	protected $alumnusChecksumRepository;
+	protected $alumnusChecksumRepository = NULL;
+
+
+
+	/*
+	 * DEPENDENCY INJECTORS
+	 */
+
+
 
 	/**
-	 * injectAlumnusRepository
-	 *
-	 * @param Tx_Alumnilist_Domain_Repository_AlumnusRepository $alumnusRepository
+	 * Injects an alumni repository.
+	 * @param Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface $alumnusRepository The alumnus repository.
 	 * @return void
 	 */
 	public function injectAlumnusRepository(Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface $alumnusRepository) {
 		$this->alumnusRepository = $alumnusRepository;
 	}
 
-	public function injectYearRepository(Tx_Alumnilist_Domain_Repository_YearRepository $yearRepository) {
+
+
+	/**
+	 * Injects a year repository.
+	 * @param Tx_Alumnilist_Domain_Repository_YearRepositoryInterface $yearRepository The year repository.
+	 * @return void
+	 */
+	public function injectYearRepository(Tx_Alumnilist_Domain_Repository_YearRepositoryInterface $yearRepository) {
 		$this->yearRepository = $yearRepository;
 	}
 
-	public function injectAlumnusChecksumRepository(Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository $alumnusChecksumRepository) {
+
+
+	/**
+	 * Injects an alumnus-checksum repository.
+	 * @param Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface $alumnusChecksumRepository The alumnus checksum repository.
+	 * @return void
+	 */
+	public function injectAlumnusChecksumRepository(Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface $alumnusChecksumRepository) {
 		$this->alumnusChecksumRepository = $alumnusChecksumRepository;
 	}
-	
+
+
+
+	/*
+	 * INITIALIZATION
+	 */
+
+
+
 	/**
+	 * Initializes the list action. Sets default parameters from settings. May
+	 * be overridden using GET/POST parameters.
+	 * @return void
+	 */
+	public function initializeListAction() {
+		if (!$this->request->hasArgument('year') && $this->settings['parameters']['year'])
+			$this->request->setArgument('year', $this->settings['parameters']['year']);
+	}
+
+
+
+	/*
+	 * ACTION METHODS
+	 */
+
+
+
+	/**
+	 * List action. Displays a list of alumni in a list. Can be filtered
+	 * optionally.
 	 * @param Tx_Alumnilist_Domain_Model_Year $year
-	 * @param string $search
+	 *                                 The year for which the alumni shall be
+	 *                                 displayed. NULL to display all alumni.
+	 * @param string $search           The search filter.
 	 * @return void
 	 */
 	public function listAction(Tx_Alumnilist_Domain_Model_Year $year = NULL, $search=NULL) {
-		echo "ASDSAD";
 		$alumni = $this->alumnusRepository->findAllFiltered($year, $search);
 		$this->view
-			->assign('alumni', $alumni)
-			->assign('years', array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()))
-			->assign('year', $year)
-			->assign('search', $search);
+				->assign('alumni', $alumni)
+				->assign('years',
+						array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()))
+				->assign('year', $year)
+				->assign('search', $search);
 	}
 
+
+
 	/**
-	 * action new
-	 *
-	 * @param $newAlumnus
+	 * New action. Displays a form for user registration.
+	 * @param Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus
+	 *                                 The new alumnus object.
 	 * @dontvalidate $newAlumnus
 	 * @return void
 	 */
 	public function newAction(Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus = NULL) {
 		$this->view
-			->assign('newAlumnus', $newAlumnus)
-			->assign('years', $this->yearRepository->findAll());
+				->assign('newAlumnus', $newAlumnus)
+				->assign('years', $this->yearRepository->findAll());
 	}
 
+
+
 	/**
-	 * action create
-	 *
-	 * @param $newAlumnus
+	 * Creates a new alumnus and stores it in the database.
+	 * @param Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus
+	 *                                 The alumnus to be created.
 	 * @return void
 	 */
 	public function createAction(Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus) {
 		$checksum = $this->alumnusChecksumRepository->findByUser($newAlumnus);
-		if($checksum === NULL)
+		if ($checksum === NULL)
 			throw new Exception("Das geht so nicht!");
 
 		$this->alumnusRepository->add($newAlumnus);
@@ -112,20 +180,24 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->redirect('list');
 	}
 
+
+
 	/**
-	 * action edit
-	 *
-	 * @param $alumnus
+	 * Displays a form for editing user data.
+	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
+	 *                                 The alumnus to be edited.
 	 * @return void
 	 */
 	public function editAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
 		$this->view->assign('alumnus', $alumnus);
 	}
 
+
+
 	/**
-	 * action update
-	 *
-	 * @param $alumnus
+	 * Updates a user's values in the database.
+	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
+	 *                                 The alumnus to be updated.
 	 * @return void
 	 */
 	public function updateAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
@@ -134,10 +206,12 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->redirect('list');
 	}
 
+
+
 	/**
-	 * action delete
-	 *
-	 * @param $alumnus
+	 * Deletes a user.
+	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
+	 *                                 The user to be deleted.
 	 * @return void
 	 */
 	public function deleteAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
@@ -146,15 +220,18 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->redirect('list');
 	}
 
+
+
 	/**
-	 * action show
-	 *
-	 * @param $alumnus
+	 * Displays a user's profile.
+	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
+	 *                                 The user whose profile is to be displayed.
 	 * @return void
 	 */
 	public function showAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
 		$this->view->assign('alumnus', $alumnus);
 	}
 
+
+
 }
-?>
