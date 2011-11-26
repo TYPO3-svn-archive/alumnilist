@@ -55,4 +55,10 @@ class Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository extends Tx_Extba
 
 
 
+	public function add($alumnusChecksum) {
+		parent::add($alumnusChecksum);
+	}
+
+
+
 }

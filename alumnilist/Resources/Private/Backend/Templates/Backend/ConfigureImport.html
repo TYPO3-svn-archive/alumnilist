@@ -1,0 +1,29 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<h1>Schild.NRW import</h1>
+
+	<f:form enctype="multipart/form-data" action="performImport" method="post">
+		<table>
+			<tr>
+				<th>Spalte</th>
+				<th>Wert</th>
+				<th>Abbildung</th>
+			</tr>
+			<f:for each="{columnValues}" as="value" key="count">
+				<tr>
+					<td>{count}</td>
+					<td>{value}</td>
+					<td>
+				<f:form.select options="{properties}" name="properties[{count}]" />
+				</td>
+				</tr>
+			</f:for>
+		</table>
+		<f:form.hidden name="filename" value="{filename}" />
+		<div>
+			<f:form.submit value="Import durchführen" />
+		</div>
+	</f:form>
+
+</f:section>

@@ -46,4 +46,10 @@ class Tx_Alumnilist_Domain_Repository_YearRepository extends Tx_Extbase_Persiste
 
 
 
+	public function findOneByYear($year) {
+		return parent::findOneByYear($year);
+	}
+
+
+
 }

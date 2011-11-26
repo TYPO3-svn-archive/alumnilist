@@ -27,7 +27,7 @@ if (TYPO3_MODE === 'BE') {
 		'mod1',	// Submodule key
 		'',						// Position
 		array(
-			'Backend' => 'index',
+			'Backend' => 'index,import,configureImport,performImport',
 		),
 		array(
 			'access' => 'user,group',

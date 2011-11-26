@@ -1,0 +1,13 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<h1>Schild.NRW import</h1>
+
+	<f:for each="{addedRows}" as="addedRow">
+		<div>
+			{addedRow.alumnus.name} {addedRow.alumnus.year.year}
+			{addedRow.checksum.checksum}
+		</div>
+	</f:for>
+
+</f:section>

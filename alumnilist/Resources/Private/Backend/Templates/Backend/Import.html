@@ -1,0 +1,16 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<h1>Schild.NRW import</h1>
+
+	<f:form enctype="multipart/form-data" action="configureImport" method="post">
+		<div>
+			Import-Datei
+			<f:form.upload name="importFile" />
+		</div>
+		<div>
+			<f:form.submit value="Import" />
+		</div>
+	</f:form>
+
+</f:section>
