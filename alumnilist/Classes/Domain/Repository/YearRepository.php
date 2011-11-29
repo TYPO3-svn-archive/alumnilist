@@ -50,6 +50,15 @@ class Tx_Alumnilist_Domain_Repository_YearRepository extends Tx_Extbase_Persiste
 		return parent::findOneByYear($year);
 	}
 
+	public function findOrCreateOneByYear($numericYear) {
+		$year = $this->findOneByYear($numericYear);
+		if($year === NULL) {
+			$year = $this->objectManager->create($this->objectType);
+			$year->setYear($numericYear);
+			$this->add($year);
+		} return $year;
+	}
+
 
 
 }

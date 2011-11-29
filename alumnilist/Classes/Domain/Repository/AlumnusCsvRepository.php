@@ -44,6 +44,7 @@ class Tx_Alumnilist_Domain_Repository_AlumnusCsvRepository implements Tx_Alumnil
 	 */
 	public function setCsvReader(Iterator $reader) {
 		$this->reader = $reader;
+		return $this;
 	}
 
 	/**
@@ -53,6 +54,7 @@ class Tx_Alumnilist_Domain_Repository_AlumnusCsvRepository implements Tx_Alumnil
 	 */
 	public function setPropertyMapping($propertyMap) {
 		$this->propertyMap = $propertyMap;
+		return $this;
 	}
 
 	/**
@@ -87,11 +89,13 @@ class Tx_Alumnilist_Domain_Repository_AlumnusCsvRepository implements Tx_Alumnil
 	protected function mapPropertiesOnObject(array $row) {
 		$alumnus = $this->objectManager->create('Tx_Alumnilist_Domain_Model_Alumnus');
 		foreach ($this->propertyMap as $index => $propertyName) {
+			if (!$propertyName)
+				continue;
 			$value = $row[$index];
 			$setterMethodName = 'set' . ucfirst($propertyName);
 			switch ($propertyName) {
 				case 'year':
-					$value = $this->yearRepository->findByYear($value);
+					$value = $this->yearRepository->findOrCreateOneByYear($value);
 					break;
 				case 'birthday':
 					$value = new DateTime($value);

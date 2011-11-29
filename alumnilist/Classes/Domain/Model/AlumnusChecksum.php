@@ -91,6 +91,10 @@ class Tx_Alumnilist_Domain_Model_AlumnusChecksum extends Tx_Extbase_DomainObject
 		$this->setChecksum($service->calculateChecksumForUserData($firstName, $lastName, $birthDay));
 	}
 
+	public function setChecksumFromUser(Tx_Alumnilist_Domain_Model_Alumnus $user) {
+		$this->setChecksumFromUserData($user->getFirstName(), $user->getLastName(), $user->getBirthday());
+	}
+
 	/**
 	 * Returns the year
 	 *

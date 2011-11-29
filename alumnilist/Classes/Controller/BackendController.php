@@ -46,23 +46,24 @@ class Tx_Alumnilist_Controller_BackendController extends Tx_Alumnilist_Controlle
 	/**
 	 * @param bool $firstLineIsHeading
 	 * @param string $delimiter
+	 * @param string $enclosure
 	 */
-	public function configureImportAction($firstLineIsHeading=FALSE, $delimiter=';') {
-		echo $_FILES['tx_alumnilist_web_alumnilistmod1']['tmp_name']['importFile'];
-		t3lib_div::debug($_FILES);
+	public function configureImportAction($firstLineIsHeading=FALSE, $delimiter=';', $enclosure=NULL) {
 		$fileName = t3lib_div::upload_to_tempfile($_FILES['tx_alumnilist_web_alumnilistmod1']['tmp_name']['importFile']);
+		print_r(file_get_contents($fileName));
 		$fileHandle = fopen($fileName, 'r');
 		if ($firstLineIsHeading)
 			fgetcsv($fileHandle, 1024, $delimiter);
 		$firstColumn = fgetcsv($fileHandle, 1024, $delimiter);
 
 		$properties = $this->reflectionService->getClassPropertyNames('Tx_Alumnilist_Domain_Model_Alumnus');
-		sort($properties);
-		array_unshift($properties, NULL);
+		$newProperties = array_combine($properties, $properties);
+		ksort($newProperties);
+		array_unshift($newProperties, NULL);
 
 		$this->view
 				->assign('columnValues', $firstColumn)
-				->assign('properties', $properties)
+				->assign('properties', $newProperties)
 				->assign('filename', $fileName);
 	}
 
@@ -73,20 +74,22 @@ class Tx_Alumnilist_Controller_BackendController extends Tx_Alumnilist_Controlle
 	 * @param string $filename
 	 */
 	public function performImportAction(array $properties, $filename) {
-		echo $filename."<br>";
-		t3lib_div::debug($properties);
+		$csvReader = $this->objectManager->create('Tx_Alumnilist_Service_CsvReader');
+		$csvReader->loadCsvFile($filename);
 		$this->alumnusCsvRepository
-			->setCsvReader($this->objectManager->create('Tx_Alumnilist_Service_CsvReader', $filename))
+			->setCsvReader($csvReader)
 			->setPropertyMapping($properties);
-		/*$results = array();
+		$results = array();
 		foreach($this->alumnusCsvRepository->findAll() as $alumnus) {
-			$checksum = $this->alumnusChecksumRepository->findByUser($alumnus);
+			$checksum = $this->objectManager->create('Tx_Alumnilist_Domain_Model_AlumnusChecksum');
+			$checksum->setChecksumFromUser($alumnus);
 			$this->alumnusChecksumRepository->add($checksum);
 			$results[] = array(
 				'alumnus' => $alumnus,
 				'checksum' => $checksum
 			);
-		}*/
+		}
+		$this->view->assign('addedRows', $results);
 	}
 
 

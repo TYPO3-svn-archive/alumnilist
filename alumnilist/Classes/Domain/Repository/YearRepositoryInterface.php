@@ -19,6 +19,8 @@ interface Tx_Alumnilist_Domain_Repository_YearRepositoryInterface {
 
 	public function findOneByYear($year);
 
+	public function findOrCreateOneByYear($year);
+
 
 
 }

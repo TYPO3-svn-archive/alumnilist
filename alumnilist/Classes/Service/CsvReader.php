@@ -29,7 +29,7 @@ class Tx_Alumnilist_Service_CsvReader implements Iterator {
 		$this->fileHandle = fopen($filename, 'r');
 		$this->rows = array();
 
-		while ($row = fgetcsv($this->fileHandle, 1024, $delimiter, $enclosure)) {
+		while ($row = fgetcsv($this->fileHandle, 1024, $this->delimiter)) {
 			$this->rows[] = $row;
 		}
 	}
@@ -61,7 +61,7 @@ class Tx_Alumnilist_Service_CsvReader implements Iterator {
 
 
 	public function valid() {
-		return current($this->rows) === FALSE;
+		return current($this->rows) !== FALSE;
 	}
 
 
