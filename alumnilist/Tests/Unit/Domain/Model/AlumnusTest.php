@@ -112,10 +112,12 @@ class Tx_Alumnilist_Domain_Model_AlumnusTest extends Tx_Extbase_Tests_Unit_BaseT
 	 */
 	public function canRemoveCourse() {
 		$course = new Tx_Alumnilist_Domain_Model_Course();
+		$course->setYear($year = $this->createYear(2011));
 		$container = new Tx_Extbase_Persistence_ObjectStorage();
 		$container->attach($course);
 		$container->detach($course);
 
+		$this->fixture->setYear($year);
 		$this->fixture->addCourse($course);
 		$this->fixture->removeCourse($course);
 

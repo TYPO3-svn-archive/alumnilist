@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2011 Martin Helmich <typo3@martin-helmich.de>
@@ -22,7 +22,7 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 /**
  * Test case for class Tx_Alumnilist_Controller_AlumnusController.
@@ -42,27 +42,31 @@ class Tx_Alumnilist_Controller_AlumnusControllerTest extends Tx_Extbase_Tests_Un
 	 * @var Tx_Alumnilist_Controller_AlumnusController
 	 */
 	protected $fixture;
-
-	protected $mockRepository;
-
+	protected $mockAlumnusRepository;
+	protected $mockYearRepository;
 	protected $mockView;
-
 	protected $mockFlashMessageContainer;
 
 	public function setUp() {
 		$proxyClassName = $this->buildAccessibleProxy('Tx_Alumnilist_Controller_AlumnusController');
-		$this->fixture = new $proxyClassName();
-		$this->mockRepository = new Tx_Alumnilist_Domain_Repository_AlumnusRepositoryMock();
-		$this->mockView = $this->getMock(
-            'Tx_Fluid_Core_View_TemplateView',
-            array(), array(), '', FALSE, FALSE, FALSE);
-		$this->mockFlashMessageContainer = $this->getMock(
-			'Tx_Extbase_MVC_Controller_FlashMessages',
-			array('add'), array(), '', FALSE, FALSE, FALSE);
+		$emptyQuery = $this->getMock('Tx_Extbase_Persistence_QueryResultInterface');
+		$this->fixture = $this->getMock($proxyClassName, array('redirect'));
+		$this->mockAlumnusRepository = $this->getMock('Tx_Alumnilist_Domain_Repository_AlumnusRepository', array('findAllFiltered', 'add', 'update', 'remove'));
+		$this->mockYearRepository = $this->getMock('Tx_Alumnilist_Domain_Repository_YearRepository');
+		$this->mockView = $this->getMock('Tx_Fluid_Core_View_TemplateView', array('assign', 'assignMultiple'), array(), '', FALSE, FALSE, FALSE);
+		$this->mockFlashMessageContainer = $this->getMock('Tx_Extbase_MVC_Controller_FlashMessages', array('add'), array(), '', FALSE, FALSE, FALSE);
 
-		$this->fixture->_set('alumnusRepository', $this->mockRepository);
-        $this->fixture->_set('view', $this->mockView);
-        $this->fixture->_set('flashMessageContainer', $this->mockFlashMessageContainer);
+		$this->mockAlumnusRepository->expects($this->any())
+				->method('findAllFiltered')
+				->will($this->returnValue($emptyQuery));
+		$this->mockYearRepository->expects($this->any())
+				->method('findAll')
+				->will($this->returnValue($emptyQuery));
+
+		$this->fixture->_set('alumnusRepository', $this->mockAlumnusRepository);
+		$this->fixture->_set('yearRepository', $this->mockYearRepository);
+		$this->fixture->_set('view', $this->mockView);
+		$this->fixture->_set('flashMessageContainer', $this->mockFlashMessageContainer);
 	}
 
 	public function tearDown() {
@@ -72,10 +76,34 @@ class Tx_Alumnilist_Controller_AlumnusControllerTest extends Tx_Extbase_Tests_Un
 	/**
 	 * @test
 	 */
-	public function listActionWorks() {
-        $this->mockRepository->expects($this->once())->method('findAll');
-        #$this->mockView->expects($this->once())->method('assign')->with('alumni');
+	public function listActionWorksWithDefaultFilter() {
+		$this->mockAlumnusRepository->expects($this->once())->method('findAllFiltered')->with(NULL, NULL);
+		$this->mockYearRepository->expects($this->once())->method('findAll');
+		$this->mockView->expects($this->exactly(4))->method('assign')->with(new PHPUnit_Framework_Constraint_PCREMatch(',(alumni|year|years|search),'));
 		$this->fixture->listAction();
+	}
+
+	/**
+	 * @test
+	 */
+	public function listActionWorksWithYearFilter() {
+		$year = $this->objectManager->create('Tx_Alumnilist_Domain_Model_Year');
+		$year->setYear(2011);
+		$this->mockAlumnusRepository->expects($this->once())->method('findAllFiltered')->with(new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($year)), NULL);
+		$this->mockYearRepository->expects($this->once())->method('findAll');
+		$this->mockView->expects($this->exactly(4))->method('assign')->with(new PHPUnit_Framework_Constraint_PCREMatch(',(alumni|year|years|search),'));
+		$this->fixture->listAction($year);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listActionWorksWithSearchString() {
+		$search = "Müller";
+		$this->mockAlumnusRepository->expects($this->once())->method('findAllFiltered')->with(NULL, $search);
+		$this->mockYearRepository->expects($this->once())->method('findAll');
+		$this->mockView->expects($this->exactly(4))->method('assign')->with(new PHPUnit_Framework_Constraint_PCREMatch(',(alumni|year|years|search),'));
+		$this->fixture->listAction(NULL, $search);
 	}
 
 	/**
@@ -83,7 +111,7 @@ class Tx_Alumnilist_Controller_AlumnusControllerTest extends Tx_Extbase_Tests_Un
 	 */
 	public function showActionWorks() {
 		$alumnus = new Tx_Alumnilist_Domain_Model_Alumnus();
-        #$this->mockView->expects($this->once())->method('assign')->with('alumnus', new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($alumnus)));
+		$this->mockView->expects($this->once())->method('assign')->with('alumnus', new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($alumnus)));
 		$this->fixture->showAction($alumnus);
 	}
 
@@ -92,10 +120,20 @@ class Tx_Alumnilist_Controller_AlumnusControllerTest extends Tx_Extbase_Tests_Un
 	 */
 	public function deleteActionWorks() {
 		$alumnus = new Tx_Alumnilist_Domain_Model_Alumnus();
-        $this->mockRepository->expects($this->once())->method('remove')->with(new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($alumnus)));
-		$this->fixture->expects($this->once())->method('redirect')->with('list');
+		$this->mockAlumnusRepository->expects($this->once())->method('remove')->with(new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($alumnus)));
 		$this->fixture->deleteAction($alumnus);
 	}
 
+	/**
+	 * @test
+	 */
+	public function newActionWorks() {
+		$alumnus = new Tx_Alumnilist_Domain_Model_Alumnus();
+		$this->mockYearRepository->expects($this->once())->method('findAll');
+		$this->mockView->expects($this->once())->method('assignMultiple')->with(new PHPUnit_Framework_Constraint_And(new PHPUnit_Framework_Constraint_ArrayHasKey('newAlumnus'), new PHPUnit_Framework_Constraint_ArrayHasKey('years')));
+		$this->fixture->newAction($alumnus);
+	}
+
 }
+
 ?>

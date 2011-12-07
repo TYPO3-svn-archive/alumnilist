@@ -24,8 +24,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-
-
 /**
  *
  *
@@ -34,14 +32,9 @@
  *
  */
 class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controller_ActionController {
-
-
-
 	/*
 	 * ATTRIBUTES
 	 */
-
-
 
 	/**
 	 * An alumnus repository.
@@ -49,13 +42,11 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 */
 	protected $alumnusRepository = NULL;
 
-
 	/**
 	 * A year repository.
 	 * @var Tx_Alumnilist_Domain_Repository_YearRepositoryInterface
 	 */
 	protected $yearRepository = NULL;
-
 
 	/**
 	 * An alumnus checksum repository.
@@ -69,8 +60,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 * DEPENDENCY INJECTORS
 	 */
 
-
-
 	/**
 	 * Injects an alumni repository.
 	 * @param Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface $alumnusRepository The alumnus repository.
@@ -79,8 +68,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	public function injectAlumnusRepository(Tx_Alumnilist_Domain_Repository_AlumnusRepositoryInterface $alumnusRepository) {
 		$this->alumnusRepository = $alumnusRepository;
 	}
-
-
 
 	/**
 	 * Injects a year repository.
@@ -91,8 +78,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->yearRepository = $yearRepository;
 	}
 
-
-
 	/**
 	 * Injects an alumnus-checksum repository.
 	 * @param Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface $alumnusChecksumRepository The alumnus checksum repository.
@@ -102,13 +87,9 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->alumnusChecksumRepository = $alumnusChecksumRepository;
 	}
 
-
-
 	/*
 	 * INITIALIZATION
 	 */
-
-
 
 	/**
 	 * Initializes the list action. Sets default parameters from settings. May
@@ -120,13 +101,9 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 			$this->request->setArgument('year', $this->settings['parameters']['year']);
 	}
 
-
-
 	/*
 	 * ACTION METHODS
 	 */
-
-
 
 	/**
 	 * List action. Displays a list of alumni in a list. Can be filtered
@@ -139,15 +116,11 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 */
 	public function listAction(Tx_Alumnilist_Domain_Model_Year $year = NULL, $search=NULL) {
 		$alumni = $this->alumnusRepository->findAllFiltered($year, $search);
-		$this->view
-				->assign('alumni', $alumni)
-				->assign('years',
-						array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()))
-				->assign('year', $year)
-				->assign('search', $search);
+		$this->view->assign('alumni', $alumni);
+		$this->view->assign('years', array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()));
+		$this->view->assign('year', $year);
+		$this->view->assign('search', $search);
 	}
-
-
 
 	/**
 	 * New action. Displays a form for user registration.
@@ -157,12 +130,11 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 * @return void
 	 */
 	public function newAction(Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus = NULL) {
-		$this->view
-				->assign('newAlumnus', $newAlumnus)
-				->assign('years', $this->yearRepository->findAll());
+		$this->view->assignMultiple(array(
+			'newAlumnus' => $newAlumnus,
+			'years' => $this->yearRepository->findAll()
+		));
 	}
-
-
 
 	/**
 	 * Creates a new alumnus and stores it in the database.
@@ -180,8 +152,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->redirect('list');
 	}
 
-
-
 	/**
 	 * Displays a form for editing user data.
 	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
@@ -191,8 +161,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	public function editAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
 		$this->view->assign('alumnus', $alumnus);
 	}
-
-
 
 	/**
 	 * Updates a user's values in the database.
@@ -206,8 +174,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->redirect('list');
 	}
 
-
-
 	/**
 	 * Deletes a user.
 	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
@@ -220,8 +186,6 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		$this->redirect('list');
 	}
 
-
-
 	/**
 	 * Displays a user's profile.
 	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
@@ -231,7 +195,5 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	public function showAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
 		$this->view->assign('alumnus', $alumnus);
 	}
-
-
 
 }

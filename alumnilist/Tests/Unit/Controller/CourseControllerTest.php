@@ -38,12 +38,17 @@
  */
 class Tx_Alumnilist_Controller_CourseControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Alumnilist_Domain_Model_Course
+	 * @var Tx_Alumnilist_Controller_CourseController
 	 */
 	protected $fixture;
 
+	protected $mockView;
+
 	public function setUp() {
-		$this->fixture = new Tx_Alumnilist_Domain_Model_Course();
+		$proxyClassName = $this->buildAccessibleProxy('Tx_Alumnilist_Controller_CourseController');
+		$this->mockView = $this->getMock('Tx_Fluid_Core_View_TemplateView', array('assign', 'assignMultiple'), array(), '', FALSE, FALSE, FALSE);
+		$this->fixture = $this->getMock($proxyClassName, array('redirect'));
+		$this->fixture->_set('view', $this->mockView);
 	}
 
 	public function tearDown() {
@@ -54,14 +59,19 @@ class Tx_Alumnilist_Controller_CourseControllerTest extends Tx_Extbase_Tests_Uni
 	 * @test
 	 */
 	public function listActionWorks() {
-		$this->markTestIncomplete();
+		$year = $this->objectManager->create('Tx_Alumnilist_Domain_Model_Year');
+		$year->setYear(2011);
+		$this->mockView->expects($this->once())->method('assign')->with('year', new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($year)));
+		$this->fixture->listAction($year);
 	}
 
 	/**
 	 * @test
 	 */
 	public function showActionWorks() {
-		$this->markTestIncomplete();
+		$course = $this->objectManager->create('Tx_Alumnilist_Domain_Model_Course');
+		$this->mockView->expects($this->once())->method('assign')->with('course', new PHPUnit_Framework_Constraint_IsInstanceOf(get_class($course)));
+		$this->fixture->showAction($course);
 	}
 
 }
