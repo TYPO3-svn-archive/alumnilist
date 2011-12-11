@@ -51,7 +51,7 @@ if (TYPO3_MODE === 'BE') {
 	 * Registers a Backend Module
 	 */
 	Tx_Extbase_Utility_Extension::registerModule(
-			$_EXTKEY, 'web', // Make module a submodule of 'web' 'mod1', // Submodule key
+			$_EXTKEY, 'web', 'mod', // Make module a submodule of 'web' 'mod1', // Submodule key
 			'', // Position
 			array(
 		'Backend' => 'index,import,configureImport,performImport',
