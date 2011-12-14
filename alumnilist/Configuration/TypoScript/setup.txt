@@ -7,6 +7,11 @@ plugin.tx_alumnilist {
 	persistence {
 		storagePid = {$plugin.tx_alumnilist.persistence.storagePid}
 	}
+	settings {
+		pages {
+
+		}
+	}
 }
 
 plugin.tx_alumnilist._CSS_DEFAULT_STYLE (

@@ -61,6 +61,10 @@
 										<numIndex index="0">LLL:EXT:alumnilist/Resources/Private/Language/locallang_flexforms.xml:Behaviour_Action_Registration</numIndex>
 										<numIndex index="1">Alumnus->new;Alumnus->create</numIndex>
 									</numIndex>
+									<numIndex index="5">
+										<numIndex index="0">All Years</numIndex>
+										<numIndex index="1">Year->list</numIndex>
+									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
