@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_alumnilist_domain_model_year'] = array(
 	'ctrl' => $TCA['tx_alumnilist_domain_model_year']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, year, courses, page',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, year, courses, alumni, page',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, year, courses, page,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, year, courses, alumni, page,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -119,6 +119,24 @@ $TCA['tx_alumnilist_domain_model_year'] = array(
 				),
 			),
 		),
+		'alumni' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.alumni',
+			'config' => array(
+				'type' => 'inline',
+				'foreign_table' => 'fe_users',
+				'foreign_field' => 'tx_alumnilist_year',
+				'foreign_table_where' => 'ORDER BY last_name ASC',
+				'maxitems'      => 9999,
+				'appearance' => array(
+					'collapse' => 0,
+					'levelLinksPosition' => 'top',
+					'showSynchronizationLink' => 1,
+					'showPossibleLocalizationRecords' => 1,
+					'showAllLocalizationLink' => 1
+				),
+			),
+		),
 		'page' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:alumnilist/Resources/Private/Language/locallang_db.xml:tx_alumnilist_domain_model_generic.page',
@@ -127,7 +145,7 @@ $TCA['tx_alumnilist_domain_model_year'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'pages',
 				'size' => 1,
-				'minitems' => 1,
+				'minitems' => 0,
 				'maxitems' => 1,
 				'wizards' => array(
 					'suggest' => array(

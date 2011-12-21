@@ -9,30 +9,13 @@ plugin.tx_alumnilist {
 	}
 	settings {
 		pages {
-
+			main = 6
 		}
+
+		alumniUserGroup = 1
 	}
 }
 
-plugin.tx_alumnilist._CSS_DEFAULT_STYLE (
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-alumnilist table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-alumnilist table th {
-		font-weight:bold;
-	}
-
-	.tx-alumnilist table td {
-		vertical-align:top;
-	}
-)
 
 
 
@@ -61,7 +44,7 @@ config.tx_extbase.persistence.classes {
 			recordType = Tx_Alumnilist_Domain_Model_Alumnus
 
 			columns {
-				tx_alumnilist_unmarriedname.mapOnProperty = unmarriedName
+				tx_alumnilist_unmarried_name.mapOnProperty = unmarriedName
 				tx_alumnilist_courses.mapOnProperty = courses
 				tx_alumnilist_year.mapOnProperty = year
 				tx_alumnilist_birthday.mapOnProperty = birthday

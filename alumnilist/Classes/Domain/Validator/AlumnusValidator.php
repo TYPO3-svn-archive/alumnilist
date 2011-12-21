@@ -48,6 +48,20 @@ class Tx_Alumnilist_Domain_Validator_AlumnusValidator extends Tx_Extbase_Validat
 
 	/**
 	 *
+	 * @var Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface
+	 */
+	protected $alumnusChecksumRepository = NULL;
+
+
+
+	public function injectAlumnusChecksumRepository(Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface $alumnusChecksumRepository) {
+		$this->alumnusChecksumRepository = $alumnusChecksumRepository;
+	}
+
+
+
+	/**
+	 *
 	 * @param  Tx_Alumnilist_Domain_Model_Alumnus $alumnus
 	 * @return boolean
 	 *
@@ -58,8 +72,15 @@ class Tx_Alumnilist_Domain_Validator_AlumnusValidator extends Tx_Extbase_Validat
 					1322147574);
 			return FALSE;
 		}
-
 		$hasErrors = FALSE;
+
+		$checksum = $this->alumnusChecksumRepository->findByUser($alumnus);
+		if ($checksum === NULL) {
+			$hasErrors = TRUE;
+			$this->addError('Die angebenen Daten passen zu keinem Schüler des Jahrgangs!',
+					1322147576);
+		}
+
 		$year = $alumnus->getYear();
 		foreach ($alumnus->getCourses() as $course) {
 			if ($course->getYear()->getYear() != $year->getYear()) {

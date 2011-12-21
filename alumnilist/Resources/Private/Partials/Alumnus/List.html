@@ -1,29 +1,34 @@
 
-<table>
-	<thead>
+<table  style="width: 100%;">
+	<tbody>
 		<tr>
 			<th>Nachname</th>
 			<th>Vorname</th>
-			<f:if condition="{disable.year}">
-				<f:else>
-					<th>Abiturjahrgang</th>
-				</f:else>
-			</f:if>
-			<th>E-Mail-Adresse</th>
-		</tr>
-	</thead>
-	<tbody>
-		<f:for each="{alumni}" as="alumnus">
-			<tr>
-				<td><f:link.action action="show" arguments="{alumnus: alumnus}">{alumnus.lastName}</f:link.action></td>
-				<td>{alumnus.firstName}</td>
-				<f:if condition="{disable.year}">
-					<f:else>
-						<td>{alumnus.year.year}</td>
-					</f:else>
+	<f:if condition="{disable.year}">
+		<f:else>
+			<th>Abiturjahrgang</th>
+		</f:else>
+	</f:if>
+	<th>E-Mail-Adresse</th>
+</tr>
+<f:for each="{alumni}" as="alumnus">
+	<f:cycle values="{0: 'odd', 1: 'even'}" as="zebraClass">
+		<tr class="{zebraClass}">
+			<td>
+				<f:link.action action="show" arguments="{alumnus: alumnus}">{alumnus.lastName}</f:link.action>
+				<f:if condition="{alumnus.unmarriedName}">
+					(geb. {alumnus.unmarriedName})
 				</f:if>
-				<td>{alumnus.email}</td>
-			</tr>
-		</f:for>
-	</tbody>
+			</td>
+		<td>{alumnus.firstName}</td>
+		<f:if condition="{disable.year}">
+			<f:else>
+				<td>{alumnus.year.year}</td>
+			</f:else>
+		</f:if>
+		<td><f:link.email email="{alumnus.email}" /></td>
+		</tr>
+	</f:cycle>
+</f:for>
+</tbody>
 </table>

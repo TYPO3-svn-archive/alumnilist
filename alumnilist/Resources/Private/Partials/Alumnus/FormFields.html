@@ -1,11 +1,27 @@
+{namespace ui=Tx_JqueryUi_ViewHelpers}
+<script type="text/javascript">jQuery.noConflict();</script>
 <div class="alumni-form-row">
 	<label>Name</label>
-	<f:form.textfield property="firstName" placeholder="Max" />
-	<f:form.textfield property="lastName" placeholder="Mustermann" />
+	<div class="alumni-form-composite">
+		<f:form.textfield property="firstName" placeholder="Max" />
+		<f:form.textfield property="lastName" placeholder="Mustermann" />
+	</div>
 </div>
 <div class="alumni-form-row">
 	<label for="unmarriedName">Geburtsname (leerlassen falls nicht zutreffend)</label>
 	<f:form.textfield property="unmarriedName" placeholder="" />
+</div>
+<div class="alumni-form-row">
+	<label for="email">E-Mail-Adresse</label>
+	<f:form.textfield property="email" placeholder="max@mustermann.tld" />
+</div>
+<div class="alumni-form-row">
+	<label for="password">Passwort</label>
+	<ui:form.password property="password" value="" />
+</div>
+<div class="alumni-form-row">
+	<label for="password">Passwort wiederholen</label>
+	<f:form.password name="repeatPassword" />
 </div>
 <div class="alumni-form-row">
 	<label for="year">Abiturjahrgang</label>
@@ -13,7 +29,7 @@
 </div>
 <div class="alumni-form-row">
 	<label for="telephone">Geburtsdatum</label>
-	<f:form.textfield property="birthday" placeholder="DD.MM.YYYY" />
+	<ui:form.datefield property="birthday" placeholder="DD.MM.YYYY" format="d.m.Y" />
 </div>
 <div class="alumni-form-row">
 	<label for="telephone">Telefonnummer</label>

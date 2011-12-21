@@ -1,25 +1,92 @@
+{namespace ui=Tx_JqueryUi_ViewHelpers}
 <f:layout name="Default" />
 
-This template displays a EDIT form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Edit.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Edit Alumnus</h1>
+	<h3>Eintrag für {alumnus.name} bearbeiten</h3>
 
-<f:flashMessages />
+	<p class="bodytext">
+		Bearbeiten Sie hier Ihren Ehemaligenlisten-Eintrag.
+	</p>
 
-<f:render partial="FormErrors" />
+	<f:render partial="FormErrors" />
 
-<f:form method="post" action="update" name="alumnus" object="{alumnus}" >
-<f:render partial="Alumnus/FormFields" arguments="{alumnus:alumnus}" />
-	<f:form.submit value="Save" />
-</f:form>
+	<f:form method="post" action="update" name="alumnus" object="{alumnus}" >
+		<ui:tabs id="tx-alumnilist-alumnus-edit" type="accordion">
+			<ui:tab label="{f:translate(key: 'alumnus_edit_general', default: 'Allgemeines')}">
+				<div class="alumni-form-row">
+					<label>Name</label>
+					<div class="alumni-form-composite">
+						{alumnus.name}
+					</div>
+				</div>
+				<div class="alumni-form-row">
+					<label for="unmarriedName">Geburtsname</label>
+					<f:if condition="{alumnus.unmarriedName}">
+						<f:then>
+							{alumnus.unmarriedName}
+						</f:then>
+						<f:else>
+							<em>Keine Angabe</em>
+						</f:else>
+					</f:if>
+				</div>
+				<div class="alumni-form-row">
+					<label for="year">Abiturjahrgang</label>
+					{alumnus.year.year}
+				</div>
+				<div class="alumni-form-row">
+					<label for="email">E-Mail-Adresse</label>
+					<f:form.textfield property="email" placeholder="max@mustermann.tld" />
+				</div>
+				<div class="alumni-form-row">
+					<label for="telephone">Geburtsdatum</label>
+					<f:format.date format="d. m. Y">{alumnus.birthday}</f:format.date>
+				</div>
+			</ui:tab>
+			<ui:tab label="{f:translate(key: 'alumnus_edit_contact', default: 'Zusätzliches')}">
+				<div class="alumni-form-row">
+					<label for="address">Adresse</label>
+					<f:form.textfield property="address" placeholder="Musterstraße 1" />
+				</div>
+				<div class="alumni-form-row">
+					<label for="telephone">PLZ/Ort</label>
+					<div class="alumni-form-composite">
+						<f:form.textfield property="zip" placeholder="12345" />
+						<f:form.textfield property="city" placeholder="Musterstadt" />
+					</div>
+				</div>
+				<div class="alumni-form-row">
+					<label for="telephone">Telefonnummer</label>
+					<f:form.textfield property="telephone" placeholder="+49-0000-0000" />
+				</div>
+				<div class="alumni-form-row">
+					<label for="www">Homepage</label>
+					<f:form.textfield property="www" placeholder="www.mustermann.de" />
+				</div>
+			</ui:tab>
+			<ui:tab label="{f:translate(key: 'alumnus_courses', default: 'Kurse')}">
+				<f:if condition="{courses}">
+					<f:then>
+						<ui:form.multiselect
+							property="courses"
+							options="{courses}"
+							multiple="true"
+							sortable="false"
+							searchable="false"
+							style="width: 95%; height: 200px; margin: 4px;" />
+					</f:then>
+					<f:else>
+						<div style="padding: 1em; font-style: italic">Leider liegen für den Abiturjahrgang {alumnus.year.year} keine Leistungskurse vor.</div>
+					</f:else>
+				</f:if>
+			</ui:tab>
+			<ui:tab label="{f:translate(key: 'alumnus_edit_password', default: 'Passwort')}">
+				<div class="alumni-form-row">
+					<label for="password">Password ändern</label>
+					<ui:form.password property="password" />
+				</div>
+			</ui:tab>
+		</ui:tabs>
+		<f:form.submit value="Speichern" />
+	</f:form>
 </f:section>

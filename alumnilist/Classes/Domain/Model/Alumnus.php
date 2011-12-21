@@ -62,8 +62,37 @@ class Tx_Alumnilist_Domain_Model_Alumnus extends Tx_Extbase_Domain_Model_Fronten
 
 
 	/**
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $firstName;
+
+
+	/**
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $lastName;
+
+
+	/**
+	 * @var string
+	 * @validate EmailAddress
+	 */
+	protected $email;
+
+
+	/**
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $password;
+
+
+	/**
 	 * The year
 	 * @var Tx_Alumnilist_Domain_Model_Year
+	 * @validate NotEmpty
 	 */
 	protected $year;
 
@@ -78,6 +107,7 @@ class Tx_Alumnilist_Domain_Model_Alumnus extends Tx_Extbase_Domain_Model_Fronten
 	/**
 	 * The user's birthday.
 	 * @var DateTime
+	 * @validate DateTime
 	 */
 	protected $birthday;
 
@@ -231,6 +261,10 @@ class Tx_Alumnilist_Domain_Model_Alumnus extends Tx_Extbase_Domain_Model_Fronten
 	 */
 	public function removeCourse(Tx_Alumnilist_Domain_Model_Course $courseToRemove) {
 		$this->courses->detach($courseToRemove);
+	}
+
+	public function setCourses(Tx_Extbase_Persistence_ObjectStorage $courses) {
+		$this->courses = $courses;
 	}
 
 

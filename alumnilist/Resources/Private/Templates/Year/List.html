@@ -2,19 +2,27 @@
 
 <f:section name="main">
 
-	<ul>
-		<f:for each="{years}" as="year">
+	<ul class="year-list">
+		<f:groupedFor each="{years}" as="yearInDecade" groupBy="decade" groupKey="decade">
 			<li>
-			<f:if condition="{year.page}">
-				<f:then>
-					<f:link.page pageUid="{year.page}">{year.year}</f:link.page>
-				</f:then>
-				<f:else>
-					<f:link.page pageUid="{settings.pages.genericYear}">{year.year}</f:link.page>
-				</f:else>
-			</f:if>
+				<strong>{decade}:</strong>
+				<ul>
+					<f:for each="{yearInDecade}" as="year">
+						<li>
+						<f:if condition="{year.page}">
+							<f:then>
+								<f:link.page pageUid="{year.page}">{year.year}</f:link.page>
+							</f:then>
+							<f:else>
+								<f:link.action action="show" arguments="{year: year}">{year.year}</f:link.action>
+							</f:else>
+						</f:if>
+						(<f:count>{year.alumni}</f:count>  Einträge)
+						</li>
+					</f:for>
+				</ul>
 			</li>
-		</f:for>
+		</f:groupedFor>
 	</ul>
 
 </f:section>

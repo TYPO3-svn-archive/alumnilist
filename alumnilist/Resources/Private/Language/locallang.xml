@@ -17,6 +17,24 @@
 			<label index="tx_alumnilist_domain_model_alumnuschecksum">AlumnusChecksum</label>
 			<label index="tx_alumnilist_domain_model_alumnuschecksum.checksum">checksum</label>
 			<label index="tx_alumnilist_domain_model_alumnuschecksum.year">year</label>
+
+			<label index="error_1245107351">One or more errors occurred while processing your registration.</label>
+			<label index="error_firstName1242859509">Please enter your first name.</label>
+			<label index="error_lastName1242859509">Please enter your last name.</label>
+			<label index="error_email1242859509">Please enter your email address.</label>
+			<label index="error_birthday1242859509">Please enter your correct birthday.</label>
+			<label index="error_year1242859509">Please enter your year.</label>
+			<label index="error_1322147576">The data you provided was invalid. Please note that both your name and birthday must be spelled correctly.</label>
+		</languageKey>
+
+		<languageKey index="de" type="array">
+			<label index="error_1245107351">Bei Ihrer Anmeldung sind Fehler aufgetreten.</label>
+			<label index="error_firstName1242859509">Bitte geben Sie Ihren Vornamen an.</label>
+			<label index="error_lastName1242859509">Bitte geben Sie Ihren Nachnamen an.</label>
+			<label index="error_email1242859509">Bitte geben Sie eine korrekte E-Mail-Adresse an.</label>
+			<label index="error_birthday1242859509">Bitte geben Sie Ihren richtigen Geburtstag an.</label>
+			<label index="error_year1242859509">Bitte geben Sie Ihren Abiturjahrgang an.</label>
+			<label index="error_1322147576">Die von Ihnen angegebenen Daten sind ungültig. Bitte beachten Sie, dass sie sowohl Ihren Namen als auch Ihr Geburtsdatum in korrekter Schreibweise angeben müssen.</label>
 		</languageKey>
 	</data>
 </T3locallang>

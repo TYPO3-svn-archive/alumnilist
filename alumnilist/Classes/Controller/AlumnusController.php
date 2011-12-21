@@ -62,6 +62,13 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 
 
 	/**
+	 * A user group repository.
+	 * @var Tx_Extbase_Domain_Repository_FrontendUserGroupRepository
+	 */
+	protected $userGroupRepository = NULL;
+
+
+	/**
 	 * A year repository.
 	 * @var Tx_Alumnilist_Domain_Repository_YearRepositoryInterface
 	 */
@@ -115,6 +122,16 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 
 
 
+	/**
+	 * Injects a user group repository.
+	 * @param Tx_Extbase_Domain_Repository_FrontendUserGroupRepository $userGroupRepository
+	 */
+	public function injectUserGroupRepository(Tx_Extbase_Domain_Repository_FrontendUserGroupRepository$userGroupRepository) {
+		$this->userGroupRepository = $userGroupRepository;
+	}
+
+
+
 	/*
 	 * INITIALIZATION
 	 */
@@ -132,6 +149,24 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 		if (!$this->request->hasArgument('year') && $this->settings['parameters']['year'])
 			$this->request->setArgument('year', $this->settings['parameters']['year']);
 	}
+
+
+
+	/**
+	 * @return void
+	 */
+	public function initializeEditAction() {
+		$this->request->setArgument('alumnus',
+				(int) $GLOBALS['TSFE']->fe_user->user['uid']);
+	}
+
+
+
+	/* public function initializeCreateAction() {
+	  $newAlumnus = $this->request->getArgument('newAlumnus');
+	  if ($newAlmnus['password'] !== $this->request->getArgument('repeatPassword'))
+	  $this->forward('new', NULL, NULL, $this->request->getArguments());
+	  } */
 
 
 
@@ -153,10 +188,12 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 * @return void
 	 *
 	 */
-	public function listAction(Tx_Alumnilist_Domain_Model_Year $year = NULL, $search=NULL) {
+	public function listAction(Tx_Alumnilist_Domain_Model_Year $year = NULL,
+			$search=NULL) {
 		$alumni = $this->alumnusRepository->findAllFiltered($year, $search);
 		$this->view->assign('alumni', $alumni);
-		$this->view->assign('years', array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()));
+		$this->view->assign('years',
+				array_merge(array('' => 'Alle'), $this->yearRepository->findAll()->toArray()));
 		$this->view->assign('year', $year);
 		$this->view->assign('search', $search);
 	}
@@ -173,9 +210,10 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 *
 	 */
 	public function newAction(Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus = NULL) {
+		$allYears = $this->yearRepository->findAll()->toArray();
 		$this->view->assignMultiple(array(
 			'newAlumnus' => $newAlumnus,
-			'years' => $this->yearRepository->findAll()
+			'years' => array_merge(array('0' => ''), $allYears)
 		));
 	}
 
@@ -190,13 +228,9 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 *
 	 */
 	public function createAction(Tx_Alumnilist_Domain_Model_Alumnus $newAlumnus) {
-		$checksum = $this->alumnusChecksumRepository->findByUser($newAlumnus);
-		if ($checksum === NULL)
-			throw new Exception("Das geht so nicht!");
-
+		$userGroup = $this->userGroupRepository->findByUid((int) $this->settings['alumniUserGroup']);
+		$newAlumnus->addUsergroup($userGroup);
 		$this->alumnusRepository->add($newAlumnus);
-		$this->flashMessageContainer->add('Your new Alumnus was created.');
-		$this->redirect('list');
 	}
 
 
@@ -210,7 +244,12 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 *
 	 */
 	public function editAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
-		$this->view->assign('alumnus', $alumnus);
+		if ((int) $GLOBALS['TSFE']->fe_user->user['uid'] !== $alumnus->getUid())
+			throw new Tx_Extbase_Security_Exception('You have to be logged in for this!');
+		$this->view->assignMultiple(array(
+			'alumnus' => $alumnus,
+			'courses' => $alumnus->getYear()->getCourses()
+		));
 	}
 
 
@@ -224,9 +263,10 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 *
 	 */
 	public function updateAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
+		if ((int) $GLOBALS['TSFE']->fe_user->user['uid'] !== $alumnus->getUid())
+			throw new Tx_Extbase_Security_Exception('You have to be logged in for this!');
 		$this->alumnusRepository->update($alumnus);
-		$this->flashMessageContainer->add('Your Alumnus was updated.');
-		$this->redirect('list');
+		$this->redirect('edit', NULL, NULL, array('alumnus' => $alumnus));
 	}
 
 
@@ -240,6 +280,8 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 *
 	 */
 	public function deleteAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
+		if ((int) $GLOBALS['TSFE']->fe_user->user['uid'] !== $alumnus->getUid())
+			throw new Tx_Extbase_Security_Exception('You have to be logged in for this!');
 		$this->alumnusRepository->remove($alumnus);
 		$this->flashMessageContainer->add('Your Alumnus was removed.');
 		$this->redirect('list');
@@ -253,7 +295,7 @@ class Tx_Alumnilist_Controller_AlumnusController extends Tx_Extbase_MVC_Controll
 	 * @param Tx_Alumnilist_Domain_Model_Alumnus $alumnus
 	 *                                 The user whose profile is to be displayed.
 	 * @return void
-	 * 
+	 *
 	 */
 	public function showAction(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
 		$this->view->assign('alumnus', $alumnus);

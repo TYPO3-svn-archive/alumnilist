@@ -42,7 +42,8 @@
  *             http://www.gnu.org/licenses/lgpl.html
  *
  */
-class Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository extends Tx_Extbase_Persistence_Repository implements Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface {
+class Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository extends Tx_Extbase_Persistence_Repository
+		implements Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepositoryInterface {
 
 
 
@@ -53,7 +54,10 @@ class Tx_Alumnilist_Domain_Repository_AlumnusChecksumRepository extends Tx_Extba
 	 *
 	 */
 	public function findByUser(Tx_Alumnilist_Domain_Model_Alumnus $alumnus) {
-		return $this->findByUserData($alumnus->getFirstName(), $alumnus->getLastName(), $alumnus->getBirthday());
+		if ($alumnus->getBirthday() === NULL)
+			return NULL;
+		return $this->findByUserData($alumnus->getFirstName(),
+						$alumnus->getLastName(), $alumnus->getBirthday());
 	}
 
 

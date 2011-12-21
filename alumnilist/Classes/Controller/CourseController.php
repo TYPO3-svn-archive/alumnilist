@@ -73,7 +73,7 @@ class Tx_Alumnilist_Controller_CourseController extends Tx_Extbase_MVC_Controlle
 	 */
 	public function initializeShowAction() {
 		if (!$this->request->hasArgument('course') && $this->settings['parameters']['course'])
-			$this->request->setArgument('course', (int) $this->settings['parameters']['year']);
+			$this->request->setArgument('course', (int) $this->settings['parameters']['course']);
 	}
 
 
@@ -104,7 +104,7 @@ class Tx_Alumnilist_Controller_CourseController extends Tx_Extbase_MVC_Controlle
 	 * @param Tx_Alumnilist_Domain_Model_Course $course
 	 *                                 The course for which to display details.
 	 * @return void
-	 * 
+	 *
 	 */
 	public function showAction(Tx_Alumnilist_Domain_Model_Course $course) {
 		$this->view->assign('course', $course);

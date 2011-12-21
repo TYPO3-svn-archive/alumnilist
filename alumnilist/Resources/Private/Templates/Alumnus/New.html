@@ -1,12 +1,12 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-<f:flashMessages />
 
-<f:render partial="FormErrors" />
+	<f:render partial="FormErrors" />
 
-<f:form method="post" action="create"  name="newAlumnus" object="{newAlumnus}">
-	<f:render partial="Alumnus/FormFields" arguments="{years: years}" />
-	<f:form.submit value="Anmelden" />
-</f:form>
+	<f:form method="post" action="create"  name="newAlumnus" object="{newAlumnus}">
+		<f:render partial="Alumnus/FormFields" arguments="{years: years}" />
+
+		<f:form.submit value="Anmelden" />
+	</f:form>
 </f:section>

@@ -1,0 +1,212 @@
+.alumni-form-row {
+	padding: 8px;
+	border-bottom: 1px dotted #aaa;
+	overflow: auto;
+}
+
+.alumni-form-row > .alumni-form-composite {
+	margin-left: 40%;
+	white-space: nowrap;
+}
+
+.alumni-form-row input, .alumni-form-row select {
+	width: 58%;
+	padding: 4px;
+	border: 1px solid #aaa;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+	background: linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+}
+
+.alumni-form-row input.f3-form-error {
+	border-color: #f00;
+}
+
+.alumni-form-row select.f3-form-error {
+	border-color: #f00;
+}
+
+.alumni-form-row > .alumni-form-composite > input {
+	width: 45%;
+}
+
+.alumni-form-row > label {
+	display: block;
+	width: 40%;
+	float: left;
+}
+
+.tx-alumnilist div.error {
+	margin: 8px;
+	padding: 8px;
+	border: 1px solid #f00;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #ffd3d3 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ffd3d3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#ffd3d3 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#ffd3d3 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#ffd3d3 100%); /* IE10+ */
+	background: linear-gradient(top,  #ffffff 0%,#ffd3d3 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffd3d3',GradientType=0 ); /* IE6-9 */
+}
+
+.tx-alumnilist div.success {
+	margin: 8px;
+	padding: 8px;
+	border: 1px solid #0f0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #d3ffd3 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#d3ffd3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#d3ffd3 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#d3ffd3 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#d3ffd3 100%); /* IE10+ */
+	background: linear-gradient(top,  #ffffff 0%,#d3ffd3 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d3ffd3',GradientType=0 ); /* IE6-9 */
+}
+
+div.error ul {
+	margin-bottom: 0px !important;
+}
+
+div.error li {
+	margin: 0px !important;
+	padding: 0px;
+}
+
+.tx-alumnilist form input[type="submit"] {
+	margin: 8px 8px 8px 40%;
+	padding: 8px 12px;
+	font-weight: bold;
+	color: #000;
+	border: 1px solid #aaa;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: rgb(205,235,142); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%); /* W3C */
+}
+
+.tx-alumnilist form input[type="submit"]:hover {
+	background: rgb(165,201,86); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(165,201,86,1) 0%, rgba(205,235,142,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(165,201,86,1)), color-stop(100%,rgba(205,235,142,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(165,201,86,1) 0%,rgba(205,235,142,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(165,201,86,1) 0%,rgba(205,235,142,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(165,201,86,1) 0%,rgba(205,235,142,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(165,201,86,1) 0%,rgba(205,235,142,1) 100%); /* W3C */
+	cursor: pointer;
+}
+
+.pstrength-bar, .pstrength-info, .pstrength-minchar {
+	margin-left: 40%;
+	width: 50%;
+}
+
+.tx-alumnilist ul.year-list > li {
+	padding: 4px;
+	border: 1px solid #aaa;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+	background: linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+	list-style-type: none;
+	height: auto;
+	overflow: auto;
+}
+
+.tx-alumnilist ul.year-list > li > strong {
+	width: 50px;
+	float: left;
+}
+
+.tx-alumnilist ul.year-list > li > ul {
+	margin-left: 50px;
+}
+
+.tx-alumnilist ul.year-list > li > ul > li {
+	float: left;
+	list-style-type: none;
+}
+
+#tx-alumnilist-year-show > div {
+	padding: 0px !important;
+	height: 350px;
+	overflow: auto;
+}
+
+#tx-alumnilist-alumnus-edit > div {
+	padding: 0px !important;
+}
+
+.alumni-form-row.alumni-filter input, .alumni-form-row.alumni-filter select {
+	width: auto;
+}
+
+.alumni-form-row.alumni-filter > div {
+	display: inline;
+}
+
+.alumni-form-row.alumni-filter > input[type="submit"] {
+	margin: 0px;
+	padding: 4px 12px;
+}
+
+.alumni-form-row.alumni-filter {
+	border: 0px;
+}
+
+.tx-alumnilist ul.f3-widget-paginator {
+	margin: 1em 0em;
+	padding: 0px !important;
+}
+
+.tx-alumnilist ul.f3-widget-paginator > li {
+	float: left;
+	list-style-type: none;
+}
+
+.tx-alumnilist fieldset {
+	padding: 4px;
+	border: 1px solid #aaa;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+	background: linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+	margin-bottom: 2em;
+}
+
+.tx-alumnilist fieldset > legend {
+	margin-left: 1em;
+	font-weight: bold;
+	color: #A80808;
+}

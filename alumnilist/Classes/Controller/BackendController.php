@@ -142,6 +142,7 @@ class Tx_Alumnilist_Controller_BackendController extends Tx_Alumnilist_Controlle
 	 *
 	 */
 	public function configureImportAction($firstLineIsHeading=FALSE, $delimiter=';', $enclosure=NULL) {
+		t3lib_div::debug($_FILES);
 		$fileName = t3lib_div::upload_to_tempfile($_FILES['tx_alumnilist_web_alumnilistmod1']['tmp_name']['importFile']);
 		print_r(file_get_contents($fileName));
 		$fileHandle = fopen($fileName, 'r');

@@ -1,21 +1,21 @@
+{namespace ui=Tx_JqueryUi_ViewHelpers}
 <f:layout name="Default" />
 
-This Template is responsible for displaying a single view for a domain object
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Single View for Year</h1>
 
-<f:flashMessages />
-<f:render partial="Year/Properties" arguments="{year:year}" />
-<f:link.action action="list">Back to list</f:link.action><br />
-<f:link.action action="new">New Year</f:link.action>
+	<h3>Abiturjahrgang {year.year}</h3>
+
+	<p class="bodytext">
+		Der Abiturjahrgang {year.year} enthält bisher <f:count>{year.alumni}</f:count> Einträge.
+	</p>
+
+	<ui:tabs id="tx-alumnilist-year-show">
+		<ui:tab label="{f:translate(key:'year_show_alumni', default: 'Ehemalige')}">
+			<f:render partial="Alumnus/List" arguments="{alumni: year.alumni, disable: {year: 1}}" />
+		</ui:tab>
+		<ui:tab label="{f:translate(key:'year_show_courses', default: 'Leistungskurse')}">
+			<f:render partial="Course/List" arguments="{courses: year.courses, disable: {year: 1}}" />
+		</ui:tab>
+	</ui:tabs>
+
 </f:section>

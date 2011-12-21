@@ -63,7 +63,15 @@
 									</numIndex>
 									<numIndex index="5">
 										<numIndex index="0">All Years</numIndex>
-										<numIndex index="1">Year->list</numIndex>
+										<numIndex index="1">Year->list;Year->show</numIndex>
+									</numIndex>
+									<numIndex index="6">
+										<numIndex index="0">Details of a specific year</numIndex>
+										<numIndex index="1">Year->show</numIndex>
+									</numIndex>
+									<numIndex index="7">
+										<numIndex index="0">Edit a user profile</numIndex>
+										<numIndex index="1">Alumnus->edit;Alumnus->update</numIndex>
 									</numIndex>
 								</items>
 							</config>

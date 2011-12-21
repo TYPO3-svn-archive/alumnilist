@@ -242,4 +242,10 @@ class Tx_Alumnilist_Domain_Model_Course extends Tx_Extbase_DomainObject_Abstract
 
 
 
+	public function __toString() {
+		return $this->getName();
+	}
+
+
+
 }

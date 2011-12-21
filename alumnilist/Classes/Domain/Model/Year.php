@@ -179,11 +179,28 @@ class Tx_Alumnilist_Domain_Model_Year extends Tx_Extbase_DomainObject_AbstractEn
 
 
 
+	/**
+	 * @return string
+	 */
+	public function getDecade() {
+		$year = $this->getYear()."";
+		$year{3} = 'x';
+		return $year;
+	}
+
+
+
 	/*
 	 * SETTER METHODS
 	 */
 
 
+	/**
+	 * @return void
+	 */
+	public function setAlumni(Tx_Extbase_Persistence_ObjectStorage $alumni) {
+		$this->alumni = $alumni;
+	}
 
 	/**
 	 *

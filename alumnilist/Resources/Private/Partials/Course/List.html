@@ -1,0 +1,47 @@
+
+<table  style="width: 100%;">
+	<tbody>
+		<tr>
+			<th>Kurs</th>
+	<f:if condition="{disable.year}">
+		<f:else>
+			<th>Abiturjahrgang</th>
+		</f:else>
+	</f:if>
+	<th>Mitglieder</th>
+</tr>
+<f:if condition="{courses}">
+	<f:then>
+<f:for each="{courses}" as="course">
+	<f:cycle values="{0: 'odd', 1: 'even'}" as="zebraClass">
+		<tr class="{zebraClass}">
+			<td>
+		<f:if condition="{course.page}">
+			<f:then>
+				<f:link.page pageUid="{course.page}">{course.name}</f:link.page>
+			</f:then>
+			<f:else>
+				<f:link.action controller="Course" action="show" arguments="{course: course}">{course.name}</f:link.action>
+			</f:else>
+		</f:if>
+		</td>
+		<f:if condition="{disable.year}">
+			<f:else>
+				<td>{alumnus.year.year}</td>
+			</f:else>
+		</f:if>
+		<td><f:count>{course.members}</f:count></td>
+		</tr>
+	</f:cycle>
+</f:for>
+		</f:then>
+	<f:else>
+		<tr>
+			<td colspan="{f:if(condition: disable.year, then: '2', else: '3')}">
+				<em>Leider sind für diesen Abiturjahrgang keine Leistungskurse bekannt.</em>
+			</td>
+		</tr>
+	</f:else>
+	</f:if>
+</tbody>
+</table>
